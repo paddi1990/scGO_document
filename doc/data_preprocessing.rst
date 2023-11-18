@@ -21,13 +21,13 @@ Data normalization and filtering
 The scGO takes as input a single cell gene expression matrix and meta_data. The gene expression matrix is a matrix of size (n_cells, n_genes), where n_genes is the number of genes and n_cells is the number of cells.  The following is a gene expression matrix example.
 
 .. csv-table:: Gene expression matrix
-   :header: "", "A1BG", "A1CF", "A2M", "A2ML1", "A4GALT", "A4GNT", "AA06", "AAAS", "AACS", "AACSP1", "...", "ZWILCH", "ZWINT", "ZXDA", "ZXDB", "ZXDC", "ZYG11B", "ZYX", "ZZEF1", "ZZZ3", "pk"
-   :widths: 30,5, 5, 5, 5, 5, 5, 5, 5, 5, 5, ..., 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+   :header: "", "A1BG", "A1CF", "A2M", "A2ML1", "A4GALT", "A4GNT", "AA06", "AAAS", "AACS", "AACSP1", "...", "ZWILCH", "ZWINT", "ZXDA", "ZXDB", "ZXDC", "ZYG11B", "ZYX", "ZZEF1", "ZZZ3"
+   :widths: 30,5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
 
-   "human1_lib1.final_cell_0001", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, "...", 0, 0, 0, 0, 0, 0, 2, 0, 0, 1
-   "human1_lib1.final_cell_0002", 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, "...", 0, 0, 0, 0, 0, 1, 4, 0, 1, 0
-   "human1_lib1.final_cell_0003", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "...", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-   "human1_lib1.final_cell_0004", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, "...", 1, 0, 0, 0, 0, 1, 3, 1, 0, 0
+   "human1_lib1.final_cell_0001", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, "...", 0, 0, 0, 0, 0, 0, 2, 0, 0
+   "human1_lib1.final_cell_0002", 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, "...", 0, 0, 0, 0, 0, 1, 4, 0, 1
+   "human1_lib1.final_cell_0003", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "...", 0, 0, 0, 0, 0, 0, 0, 0, 0
+   "human1_lib1.final_cell_0004", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, "...", 1, 0, 0, 0, 0, 1, 3, 1, 0
 
 The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is the number of meta_data. The meta_data should have a column named ``cell_type``. The following is a meta_data matrix example.
 
