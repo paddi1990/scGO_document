@@ -18,8 +18,7 @@ This section involves processing single cell gene expression matrix and meta_dat
 Data normalization and filtering
 ********************
 
-The scGO takes as input a single cell gene expression matrix and meta_data. The gene expression matrix is a matrix of size (n_cells, n_genes), where n_genes is the number of genes and n_cells is the number of cells. The meta_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is the number of meta_data. 
-
+The scGO takes as input a single cell gene expression matrix and meta_data. The gene expression matrix is a matrix of size (n_cells, n_genes), where n_genes is the number of genes and n_cells is the number of cells.  The following is a gene expression matrix example.
 
 .. csv-table:: Gene expression matrix
    :header: "A1BG", "A1CF", "A2M", "A2ML1", "A4GALT", "A4GNT", "AA06", "AAAS", "AACS", "AACSP1", ..., "ZWILCH", "ZWINT", "ZXDA", "ZXDB", "ZXDC", "ZYG11B", "ZYX", "ZZEF1", "ZZZ3", "pk"
@@ -30,8 +29,18 @@ The scGO takes as input a single cell gene expression matrix and meta_data. The 
    "human1_lib1.final_cell_0003", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ..., 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
    "human1_lib1.final_cell_0004", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, ..., 1, 0, 0, 0, 0, 1, 3, 1, 0, 0
 
+The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is the number of meta_data. The meta_data should have a column named ``cell_type``. The following is a meta_data matrix example.
 
+.. csv-table:: Meta data
+   :header: "donor", "cell_type"
+   :widths: 30, 30
 
+   "human1_lib1.final_cell_0001", "GSM2230757", "Acinar cells"
+   "human1_lib1.final_cell_0002", "GSM2230757", "Acinar cells"
+   "human1_lib1.final_cell_0003", "GSM2230757", "Acinar cells"
+   "human1_lib1.final_cell_0004", "GSM2230757", "Acinar cells"
+
+Normalization is a crucial step in the analysis of single-cell RNA sequencing (scRNA-seq) data. scGO used total counts normalization. Normalize each cell's gene expression values by dividing them by the total counts (or library size) of that cell.
 
 
 Guppy is used for basecalling in TandemMod. Guppy, as well as the now deprecated Albacore and all other basecallers, uses files in fast5 format as input. In addition to basecalling, Guppy also performs filtering of low quality reads, clipping of Oxford Nanopore adapters. More detailed documentation about Guppy can be found on the official `Nanopore Technology repository <https://github.com/nanoporetech/pyguppyclient>`_. This step can be time-consuming and may require several hours or even days to complete, depending on the computational capacity available::
