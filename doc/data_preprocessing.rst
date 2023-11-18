@@ -40,7 +40,13 @@ The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is t
    "human1_lib1.final_cell_0003", "GSM2230757", "Acinar cells"
    "human1_lib1.final_cell_0004", "GSM2230757", "Acinar cells"
 
-Normalization is a crucial step in the analysis of single-cell RNA sequencing (scRNA-seq) data. scGO used total counts normalization. Normalize each cell's gene expression values by dividing them by the total counts (or library size) of that cell.
+Normalization is a crucial step in the analysis of single-cell RNA sequencing (scRNA-seq) data. scGO employs total counts normalization, wherein each cell's gene expression values are normalized by dividing them by the counts per ten thousand (CP10K) of that cell. Other normalization methods are also effective in conjunction with scGO. If the gene expression matrix is already normalized, the normalization step can be skipped. Following that, scGO retains the top genes expressed in the majority of cells, with a recommended range of 2000-6000 genes for input. This process was implemented in the ``norm_and_filter`` command from the data processing script. The following is an example of the usage::
+
+    python data_processing.py norm_and_filter --gene_expression_matrix ../demo/baron_data.tsv --num_genes 2000 --output ../demo/baron_data_filtered.tsv
+
+
+Biological knowledge utilization
+********************
 
 
 Guppy is used for basecalling in TandemMod. Guppy, as well as the now deprecated Albacore and all other basecallers, uses files in fast5 format as input. In addition to basecalling, Guppy also performs filtering of low quality reads, clipping of Oxford Nanopore adapters. More detailed documentation about Guppy can be found on the official `Nanopore Technology repository <https://github.com/nanoporetech/pyguppyclient>`_. This step can be time-consuming and may require several hours or even days to complete, depending on the computational capacity available::
