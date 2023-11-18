@@ -22,7 +22,7 @@ The scGO takes as input a single cell gene expression matrix and meta_data. The 
 
 .. csv-table:: Gene expression matrix
    :header: "A1BG", "A1CF", "A2M", "A2ML1", "A4GALT", "A4GNT", "AA06", "AAAS", "AACS", "AACSP1", ..., "ZWILCH", "ZWINT", "ZXDA", "ZXDB", "ZXDC", "ZYG11B", "ZYX", "ZZEF1", "ZZZ3", "pk"
-   :widths: 30, 5, 5, 5, 5, 5, 5, 5, 5, 5, ..., 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+   :widths: 30,5, 5, 5, 5, 5, 5, 5, 5, 5, 5, ..., 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
 
    "human1_lib1.final_cell_0001", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, ..., 0, 0, 0, 0, 0, 0, 2, 0, 0, 1
    "human1_lib1.final_cell_0002", 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, ..., 0, 0, 0, 0, 0, 1, 4, 0, 1, 0
@@ -33,7 +33,7 @@ The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is t
 
 .. csv-table:: Meta data
    :header: "donor", "cell_type"
-   :widths: 30, 30
+   :widths: 30, 30, 30
 
    "human1_lib1.final_cell_0001", "GSM2230757", "Acinar cells"
    "human1_lib1.final_cell_0002", "GSM2230757", "Acinar cells"
