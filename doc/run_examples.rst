@@ -2,9 +2,9 @@
 
 Run examples
 ==================================
-This sections gives examples on how to use the three modes of TandemMod.
+This section demostrates how to use scGO with examples.
 
-Train m6A model using IVET m6A dataset
+Train scGO model using scRNA-seq dataset
 ********************
 IVET datasets have been uploaded to GEO database under the accession number `GSE227087 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227087>`_. To train a m6A detection model, the followinng two fast5 files (m6A-modified and unmodified) are required.
 ::
