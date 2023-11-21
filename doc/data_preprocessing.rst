@@ -42,7 +42,7 @@ The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is t
 
 Normalization is a crucial step in the analysis of single-cell RNA sequencing (scRNA-seq) data. scGO employs total counts normalization, wherein each cell's gene expression values are normalized by dividing them by the counts per ten thousand (CP10K) of that cell. Other normalization methods are also effective in conjunction with scGO. If the gene expression matrix is already normalized, the normalization step can be skipped. Following that, scGO retains the top genes expressed in the majority of cells, with a recommended range of 2000-6000 genes for input. This process was implemented in the ``norm_and_filter`` command from the data processing script. The following is an example of the usage::
 
-    python data_processing.py norm_and_filter --gene_expression_matrix ../demo/baron_data.tsv --num_genes 2000 --output ../demo/baron_data_filtered.tsv
+    python scripts/data_processing.py norm_and_filter --gene_expression_matrix ../demo/baron_data.tsv --num_genes 2000 --output ../demo/baron_data_filtered.tsv
 
 
 Biological knowledge utilization
@@ -50,7 +50,7 @@ Biological knowledge utilization
 
 In scGO, GO knowledge is employed to establish connections between gene nodes and GO nodes. A gene node is connected to a GO node if the gene is annotated with the GO term. The human GO annotation used in this study is downloaded from the `Gene Ontology knowledgebase <https://doi.org/10.5281/zenodo.7504797>`_. The connections between genes and TFs are builded according to the DAP-seq TF annotation data. The DAP-seq data is downloaded from the `Remap database <https://remap2022.univ-amu.fr/>`_. The demo data offers a subset of the processed DAP-seq file for illustrative purposes.  The full processed DAP-seq file has been uploaded to `google drive <https://drive.google.com/file/d/1VPSDyNbs4lBITm2VoPD2eJ3BZGcdkrdC/view?usp=drive_link>`_. The following is an example of the usage::
 
-    python data_processing.py build_network  --go_annotation ../demo/go_annotation.tsv --tf_annotation ../demo/tf_annotation.tsv 
+    python scripts/data_processing.py build_network  --go_annotation demo/go_annotation.tsv --tf_annotation demo/tf_annotation.tsv 
 
 
 Data integration

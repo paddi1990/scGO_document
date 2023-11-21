@@ -55,6 +55,7 @@ Application of pretrained scGO to predict new data
 ********************
 
 **Predict new data**
+
 After the completion of the training process, the model file ``scGO.demo.pkl`` will be stored in the ``./models/`` folder. This trained model can be employed to make predictions on new data. Use the provided command to predict new data, and assign the predicted results using the ``--output`` argument.
 ::
     python scripts/scGO.py predict --gene_expression_matrix demo/baron_data.csv  --model models/scGO.demo.pkl --output demo/baron_data_filtered.predicted.csv
@@ -134,7 +135,7 @@ After the data processing and model training, the following files should be gene
            └── m6A.demo.IVET.pkl
 
 
-Train m6A model using curlcake m6A dataset
+````Train m6A model using curlcake m6A dataset
 ********************
 Curlcake datasets are publicly available at the GEO database under the accession code `GSE124309 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE124309>`_. In this demo, subsets of the curcake datasets (m6A-modified and unmodified) were taken for demonstration purposes due to the large size of the original datasets. The demo datasets were located under ``./demo/curlcake/`` directory.
 ::
@@ -283,6 +284,7 @@ After the data processing and model training, the following files should be gene
     └── model
            └── m6A.demo.curlcake.pkl
 
+````
 
 Transfer m6A model to m7G using ELIGOS dataset
 ********************
