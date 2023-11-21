@@ -6,12 +6,14 @@ This section demostrates how to use scGO with examples.
 
 Train scGO model using `Baron dataset <https://www.cell.com/cell-systems/fulltext/S2405-4712(16)30266-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2405471216302666%3Fshowall%3Dtrue>`_.
 ********************
-The Baron dataset covers a range of cell types found in the pancreas, including acinar cells, activated stellate cells, alpha cells, beta cells, delta cells, ductal cells, endothelial cells, epsilon cells, gamma cells, macrophages, mast cells, quiescent stellate cells, and schwann cells. Baron dataset is available at `GSE84133 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE84133>`_. In this demo, a subsets of the the baron dataset was taken for demonstration purposes due to the large size of the original datasets. The demo dataset was located under ``../demo/`` directory.
+The Baron dataset covers a range of cell types found in the pancreas, including acinar cells, activated stellate cells, alpha cells, beta cells, delta cells, ductal cells, endothelial cells, epsilon cells, gamma cells, macrophages, mast cells, quiescent stellate cells, and schwann cells. Baron dataset is available at `GSE84133 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE84133>`_. In this demo, a subsets of the the baron dataset was taken for demonstration purposes due to the large size of the original datasets. The demo dataset was located under ``./demo/`` directory.
 ::
     
     demo
     ├── baron_data.csv
-    └── baron_meta_data.csv
+    ├── baron_meta_data.csv
+    ├── goa_human.gaf
+    └── TF_annotation_hg38.demo.tsv
 
 
 **1. Data normalization and filtering**

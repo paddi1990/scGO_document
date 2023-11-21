@@ -13,8 +13,14 @@ The following modules are needed to run scGO.
      - version
    * - python 
      - 3.8.13
-  * - torch
+   * - torch
      - 1.9.1
+   * - scanpy
+     - 1.9.3
+   * - scikit-learn
+     - 1.3.2
+   * - scipy
+     - 1.10.1
 
 
 Conda is recommended for package management, you can create a new conda environment and then install the packages. Here's an example of how you can do it. Create a new conda environment::
@@ -29,6 +35,8 @@ Install the required modules::
 
     pip install torch==1.9.1
     pip install scanpy==1.9.3
+    pip install scikit-learn==1.3.2
+    pip install scipy==1.10.1
     
 
 
@@ -51,46 +59,43 @@ TandemMod offers three modes: de novo training, transfer learning, and predictio
 
 In the provided repository, the pretrained models are located under the ``./models`` directory, and the data processing scripts and the main script are located under the ``./scripts`` directory:: 
 
-    .
-    ├── data
-    │   ├── A_test.tsv
-    │   ├── A_train.tsv
-    │   ├── m5C
-    │   ├── m6A
-    │   ├── m6A_test.tsv
-    │   └── m6A_train.tsv
-    ├── demo
-    │   ├── fast5
-    │   │   └── batch_0.fast5
-    │   ├── files.txt
-    │   ├── guppy
-    │   │   ├── fail
-    │   │   │   └── fastq_runid_71d544d3bd9e1fe7886a5d176c756a576d30ed50_0_0.fastq
-    │   │   ├── guppy_basecaller_log-2023-06-06_09-58-28.log
-    │   │   ├── pass
-    │   │   │   └── fastq_runid_71d544d3bd9e1fe7886a5d176c756a576d30ed50_0_0.fastq
-    │   │   ├── sequencing_summary.txt
-    │   │   ├── sequencing_telemetry.js
-    │   │   └── workspace
-    │   │       └── batch_0.fast5
-    ├── models
-    │   ├── hm5C_transfered_from_m5C.pkl
-    │   ├── m1A_train_on_rice_cDNA.pkl
-    │   ├── m5C_train_on_rice_cDNA.pkl
-    │   ├── m6A_train_on_rice_cDNA.pkl
-    │   ├── m7G_transfered_from_m5C.pkl
-    │   ├── psU_transfered_from_m5C.pkl
-    │   ├── test.model
-    │   └── test.pkl
-    ├── plot
-    ├── README.md
-    ├── scripts
-    │   ├── extract_feature_from_signal.py
-    │   ├── extract_signal_from_fast5.py
-    │   ├── __init__.py
-    │   ├── models.py
-    │   ├── TandemMod.py
-    │   ├── train_test_split.py
-    │   ├── transcriptome_loci_to_genome_loci.py
-    │   └── utils.py
-    └── TandemMod.yaml
+  scGO
+  ├── data
+  │   ├── goa_human.gaf.zip
+  │   └── TF_annotation_hg38.demo.tsv
+  ├── demo
+  │   ├── baron_data.csv
+  │   ├── baron_data_filtered.csv
+  │   ├── baron_data_filtered.predicted.csv
+  │   ├── baron_meta_data.csv
+  │   ├── baron_meta_data_senescence_score.csv
+  │   ├── baron_meta_data_senescence_score.predicted.csv
+  │   ├── feature
+  │   ├── gene_TF_dict
+  │   ├── gene_to_TF_transform_matrix
+  │   ├── goa_human.gaf.zip
+  │   ├── GO_mask
+  │   ├── GO_TF_mask
+  │   ├── test_data.csv
+  │   ├── TF_annotation_hg38.demo.tsv
+  │   ├── TF_gene_dict
+  │   └── TF_mask
+  ├── models
+  │   ├── scGO.demo.pkl
+  │   └── scGO.senescence_score.demo.pkl
+  ├── README.md
+  ├── results_reproduce
+  ├── scGO.yml
+  └── scripts
+      ├── data_processing.py
+      ├── __init__.py
+      ├── models.py
+      ├── __pycache__
+      │   ├── models.cpython-38.pyc
+      │   └── utils.cpython-38.pyc
+      ├── rds_to_csv.r
+      ├── scGO.py
+      ├── test.csv
+      ├── test.ipynb
+      └── utils.py
+
