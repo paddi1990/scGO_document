@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data preprocessing &mdash; scGO 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scGO
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-normalization-and-filtering">Data normalization and filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biological-knowledge-utilization">Biological knowledge utilization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-integration">Data integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_examples.html">Run examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cite.html">Citing scGO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">scGO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data preprocessing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/data_preprocessing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-preprocessing">
+<span id="id1"></span><h1>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading"></a></h1>
+<p>This section involves processing single cell gene expression matrix and meta_data to train and test data. The preprocessing procedure typically consists of several stages.</p>
+<ul class="simple">
+<li><p>Data normalization and filtering.</p></li>
+<li><p>Build network structure using GO annotations.</p></li>
+<li><p>Build network structure using TF-gene relationships.</p></li>
+<li><p>Dataset creation.</p></li>
+</ul>
+<section id="data-normalization-and-filtering">
+<h2>Data normalization and filtering<a class="headerlink" href="#data-normalization-and-filtering" title="Link to this heading"></a></h2>
+<p>The scGO takes as input a single cell gene expression matrix and meta_data. The gene expression matrix is a matrix of size (n_cells, n_genes), where n_genes is the number of genes and n_cells is the number of cells.  The following is a gene expression matrix example.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Gene expression matrix</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>A1BG</p></th>
+<th class="head"><p>A1CF</p></th>
+<th class="head"><p>A2M</p></th>
+<th class="head"><p>A2ML1</p></th>
+<th class="head"><p>A4GALT</p></th>
+<th class="head"><p>A4GNT</p></th>
+<th class="head"><p>AA06</p></th>
+<th class="head"><p>AAAS</p></th>
+<th class="head"><p>AACS</p></th>
+<th class="head"><p>AACSP1</p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>ZWILCH</p></th>
+<th class="head"><p>ZWINT</p></th>
+<th class="head"><p>ZXDA</p></th>
+<th class="head"><p>ZXDB</p></th>
+<th class="head"><p>ZXDC</p></th>
+<th class="head"><p>ZYG11B</p></th>
+<th class="head"><p>ZYX</p></th>
+<th class="head"><p>ZZEF1</p></th>
+<th class="head"><p>ZZZ3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>human1_lib1.final_cell_0001</p></td>
+<td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>…</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>human1_lib1.final_cell_0002</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>…</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>human1_lib1.final_cell_0003</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>…</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>human1_lib1.final_cell_0004</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>…</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mata_data is a matrix of size (n_cells, n_meta_data), where n_meta_data is the number of meta_data. The meta_data should have a column named <code class="docutils literal notranslate"><span class="pre">cell_type</span></code>. The following is a meta_data matrix example.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Meta data</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>donor</p></th>
+<th class="head"><p>cell_type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>human1_lib1.final_cell_0001</p></td>
+<td><p>GSM2230757</p></td>
+<td><p>Acinar cells</p></td>
+</tr>
+<tr class="row-odd"><td><p>human1_lib1.final_cell_0002</p></td>
+<td><p>GSM2230757</p></td>
+<td><p>Acinar cells</p></td>
+</tr>
+<tr class="row-even"><td><p>human1_lib1.final_cell_0003</p></td>
+<td><p>GSM2230757</p></td>
+<td><p>Acinar cells</p></td>
+</tr>
+<tr class="row-odd"><td><p>human1_lib1.final_cell_0004</p></td>
+<td><p>GSM2230757</p></td>
+<td><p>Acinar cells</p></td>
+</tr>
+</tbody>
+</table>
+<p>Normalization is a crucial step in the analysis of single-cell RNA sequencing (scRNA-seq) data. scGO employs total counts normalization, wherein each cell’s gene expression values are normalized by dividing them by the counts per ten thousand (CP10K) of that cell. Other normalization methods are also effective in conjunction with scGO. If the gene expression matrix is already normalized, the normalization step can be skipped. Following that, scGO retains the top genes expressed in the majority of cells, with a recommended range of 2000-6000 genes for input. This process was implemented in the <code class="docutils literal notranslate"><span class="pre">norm_and_filter</span></code> command from the data processing script. The following is an example of the usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">norm_and_filter</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="o">../</span><span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">num_genes</span> <span class="mi">2000</span> <span class="o">--</span><span class="n">output</span> <span class="o">../</span><span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+</section>
+<section id="biological-knowledge-utilization">
+<h2>Biological knowledge utilization<a class="headerlink" href="#biological-knowledge-utilization" title="Link to this heading"></a></h2>
+<p>In scGO, GO knowledge is employed to establish connections between gene nodes and GO nodes. A gene node is connected to a GO node if the gene is annotated with the GO term. The human GO annotation used in this study is downloaded from the <a class="reference external" href="https://doi.org/10.5281/zenodo.7504797">Gene Ontology knowledgebase</a>. The connections between genes and TFs are builded according to the DAP-seq TF annotation data. The DAP-seq data is downloaded from the <a class="reference external" href="https://remap2022.univ-amu.fr/">Remap database</a>. The demo data offers a subset of the processed DAP-seq file for illustrative purposes.  The full processed DAP-seq file has been uploaded to <a class="reference external" href="https://drive.google.com/file/d/1VPSDyNbs4lBITm2VoPD2eJ3BZGcdkrdC/view?usp=drive_link">google drive</a>. The following is an example of the usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">build_network</span>  <span class="o">--</span><span class="n">go_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">go_annotation</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">tf_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">tf_annotation</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+</section>
+<section id="data-integration">
+<h2>Data integration<a class="headerlink" href="#data-integration" title="Link to this heading"></a></h2>
+<p>In scRNA-seq, batch effects can significantly impact the interpretation of scRNA-seq data and may lead to incorrect conclusions if not properly addressed. Data from various sources was harmonized using the Seurat <a class="reference external" href="https://satijalab.org/seurat/articles/integration_mapping.html">data integration pipeline</a> in this work. Initially, log normalization was applied, and variable features were identified independently for each dataset. Subsequently, the ‘anchors,’ representing matching cell populations across the individual datasets, were identified to combine these datasets into a unified Seurat object. This integration process aligns and harmonizes the data, allowing for coherent analysis across diverse sources.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yulab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Run examples &mdash; scGO 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Help" href="help.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            scGO
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#train-scgo-model-using-baron-dataset">Train scGO model using Baron dataset.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-of-pretrained-scgo-to-predict-new-data">Application of pretrained scGO to predict new data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#train-a-regression-model-that-predict-a-continous-value">Train a regression model that predict a continous value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cite.html">Citing scGO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">scGO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Run examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/run_examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="run-examples">
+<span id="id1"></span><h1>Run examples<a class="headerlink" href="#run-examples" title="Link to this heading"></a></h1>
+<p>This section demostrates how to use scGO with examples.</p>
+<section id="train-scgo-model-using-baron-dataset">
+<h2>Train scGO model using <a class="reference external" href="https://www.cell.com/cell-systems/fulltext/S2405-4712(16)30266-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2405471216302666%3Fshowall%3Dtrue">Baron dataset</a>.<a class="headerlink" href="#train-scgo-model-using-baron-dataset" title="Link to this heading"></a></h2>
+<p>The Baron dataset covers a range of cell types found in the pancreas, including acinar cells, activated stellate cells, alpha cells, beta cells, delta cells, ductal cells, endothelial cells, epsilon cells, gamma cells, macrophages, mast cells, quiescent stellate cells, and schwann cells. Baron dataset is available at <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE84133">GSE84133</a>. In this demo, a subsets of the the baron dataset was taken for demonstration purposes due to the large size of the original datasets. The demo dataset was located under <code class="docutils literal notranslate"><span class="pre">./demo/</span></code> directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>demo
+├── baron_data.csv
+├── baron_meta_data.csv
+├── goa_human.gaf
+└── TF_annotation_hg38.demo.tsv
+</pre></div>
+</div>
+<p><strong>1. Data normalization and filtering</strong></p>
+<p>Normalize data and filter out genes that expressed in fewer cells. The number of genes to be retained can be customized by using the argument <code class="docutils literal notranslate"><span class="pre">--num_genes</span></code>. The default value is 2000. The normalized and filtered data will be saved in the <code class="docutils literal notranslate"><span class="pre">./demo/</span></code> folder.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">norm_and_filter</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">num_genes</span> <span class="mi">2000</span> <span class="o">--</span><span class="n">output</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p><strong>2. Building network connections</strong></p>
+<p>Build network connections between gene layer, TF layer and GO layer according to GO annotations and TF annotations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">build_network</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">GO_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">goa_human</span><span class="o">.</span><span class="n">gaf</span>  <span class="o">--</span><span class="n">TF_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">TF_annotation_hg38</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+<p><strong>3. Model training</strong></p>
+<p>To train the scGO model using your own dataset from scratch, you can run the <code class="docutils literal notranslate"><span class="pre">scGO.py</span></code> script with the command <code class="docutils literal notranslate"><span class="pre">train</span></code>. scGO accepts both single-cell gene expression matrix (.csv) as input. Meta data (.csv) is needed for the training process. The column cell_type in the meta data is used as the label for training. You can specify the model save path by using the argument <code class="docutils literal notranslate"><span class="pre">--model</span></code>. The model’s training epochs can be defined using the argument <code class="docutils literal notranslate"><span class="pre">--epochs</span></code>, and the model states will be saved at the end of each epoch. The training process duration can vary, depending on the size of your dataset and the computational capacity, and may range from minutes to several hours. Here is an example of the training process using the demo dataset.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">py</span> <span class="n">train</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">meta_data</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_meta_data</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">model</span> <span class="n">models</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">pkl</span>
+</pre></div>
+</div>
+<p>During the training process, the following information can be used to monitor and evaluate the performance of the model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epoch</span> <span class="mi">0</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">0.8</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.6765657464663187</span>
+<span class="n">epoch</span> <span class="mi">1</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.21495116502046585</span>
+<span class="n">epoch</span> <span class="mi">2</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.045270659029483795</span>
+<span class="n">epoch</span> <span class="mi">3</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.01799739959339301</span>
+<span class="n">epoch</span> <span class="mi">4</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.008456315845251083</span>
+<span class="n">epoch</span> <span class="mi">5</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0038305727454523244</span>
+<span class="n">epoch</span> <span class="mi">6</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0015001039331158001</span>
+<span class="n">epoch</span> <span class="mi">7</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0006393008710195621</span>
+<span class="n">epoch</span> <span class="mi">8</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0003799065889324993</span>
+<span class="n">epoch</span> <span class="mi">9</span>         <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.00025623222851815325</span>
+<span class="n">epoch</span> <span class="mi">10</span>        <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0001992921606870368</span>
+<span class="n">epoch</span> <span class="mi">11</span>        <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0001639570424837681</span>
+<span class="n">epoch</span> <span class="mi">12</span>        <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.00013759526094266525</span>
+<span class="n">epoch</span> <span class="mi">13</span>        <span class="n">accuracy</span><span class="p">:</span>        <span class="mf">1.0</span>    <span class="n">loss</span><span class="p">:</span>    <span class="mf">0.0001203383071697317</span>
+</pre></div>
+</div>
+</section>
+<section id="application-of-pretrained-scgo-to-predict-new-data">
+<h2>Application of pretrained scGO to predict new data<a class="headerlink" href="#application-of-pretrained-scgo-to-predict-new-data" title="Link to this heading"></a></h2>
+<p><strong>Predicting new data</strong></p>
+<p>After the completion of the training process, the model file <code class="docutils literal notranslate"><span class="pre">scGO.demo.pkl</span></code> will be stored in the <code class="docutils literal notranslate"><span class="pre">./models/</span></code> folder. This trained model can be employed to make predictions on new data. Use the <code class="docutils literal notranslate"><span class="pre">predict</span></code> command to predict new data, and assign the predicted results using the <code class="docutils literal notranslate"><span class="pre">--output</span></code> argument.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">py</span> <span class="n">predict</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">csv</span>  <span class="o">--</span><span class="n">model</span> <span class="n">models</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">pkl</span> <span class="o">--</span><span class="n">output</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>The prediction results include a predicted cell type label along with the confidence probability of the predicted cell type. The following serves as an example of the prediction results.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                        <span class="n">cell_id</span>       <span class="n">predicted</span> <span class="n">cell_type</span>      <span class="n">probability</span>
+<span class="mi">0</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0123</span>       <span class="n">Epsilon</span> <span class="n">cells</span>            <span class="mf">0.999998</span>
+<span class="mi">1</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0288</span>       <span class="n">Macrophages</span>              <span class="mf">1.000000</span>
+<span class="mi">2</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0309</span>       <span class="n">Epsilon</span> <span class="n">cells</span>            <span class="mf">0.999936</span>
+<span class="mi">3</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0323</span>       <span class="n">Epsilon</span> <span class="n">cells</span>            <span class="mf">0.999969</span>
+<span class="mi">4</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0417</span>       <span class="n">Macrophages</span>              <span class="mf">0.999999</span>
+<span class="o">..</span>  <span class="o">...</span>                               <span class="o">...</span>                      <span class="o">...</span>
+<span class="mi">68</span>  <span class="n">human4_lib1</span><span class="o">.</span><span class="n">final_cell_0349</span>       <span class="n">Macrophages</span>              <span class="mf">0.999999</span>
+<span class="mi">69</span>  <span class="n">human4_lib1</span><span class="o">.</span><span class="n">final_cell_0579</span>       <span class="n">Macrophages</span>              <span class="mf">1.000000</span>
+<span class="mi">70</span>  <span class="n">human4_lib3</span><span class="o">.</span><span class="n">final_cell_0064</span>       <span class="n">Macrophages</span>              <span class="mf">0.999999</span>
+<span class="mi">71</span>  <span class="n">human4_lib3</span><span class="o">.</span><span class="n">final_cell_0215</span>       <span class="n">Macrophages</span>              <span class="mf">1.000000</span>
+<span class="mi">72</span>  <span class="n">human4_lib3</span><span class="o">.</span><span class="n">final_cell_0574</span>       <span class="n">Macrophages</span>              <span class="mf">1.000000</span>
+</pre></div>
+</div>
+<p><strong>Reporting novel cell type</strong></p>
+<p>scGO provided the configuration to indiate novel cell type by setting the argument <code class="docutils literal notranslate"><span class="pre">--indicate_novel_cell_type</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. The predictions with low confident probability will be asigned as novel cell type. The following serves as an example of the prediction results with novel cell type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">py</span> <span class="n">predict</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">csv</span>  <span class="o">--</span><span class="n">model</span> <span class="n">models</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">pkl</span> <span class="o">--</span><span class="n">indicate_novel_cell_type</span> <span class="kc">True</span> <span class="o">--</span><span class="n">output</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered_novel</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">csv</span>
+
+
+                        <span class="n">cell_id</span>        <span class="n">predicted</span> <span class="n">cell_type</span>     <span class="n">probability</span>
+<span class="mi">0</span>   <span class="n">human4_lib1</span><span class="o">.</span><span class="n">final_cell_0035</span>        <span class="n">Macrophages</span>             <span class="mf">0.999773</span>
+<span class="mi">1</span>   <span class="n">human3_lib3</span><span class="o">.</span><span class="n">final_cell_0413</span>        <span class="n">Macrophages</span>             <span class="mf">1.000000</span>
+<span class="mi">2</span>   <span class="n">human1_lib1</span><span class="o">.</span><span class="n">final_cell_0428</span>        <span class="n">novel</span> <span class="n">cell</span> <span class="nb">type</span>         <span class="mf">0.515880</span>
+<span class="mi">3</span>   <span class="n">human3_lib3</span><span class="o">.</span><span class="n">final_cell_0819</span>        <span class="n">Epsilon</span> <span class="n">cells</span>           <span class="mf">0.880849</span>
+<span class="mi">4</span>   <span class="n">human3_lib3</span><span class="o">.</span><span class="n">final_cell_0621</span>        <span class="n">Epsilon</span> <span class="n">cells</span>           <span class="mf">0.998823</span>
+<span class="o">..</span>  <span class="o">...</span>                                <span class="o">...</span>                     <span class="o">...</span>
+<span class="mi">93</span>  <span class="n">human2_lib1</span><span class="o">.</span><span class="n">final_cell_0399</span>        <span class="n">Epsilon</span> <span class="n">cells</span>           <span class="mf">0.999883</span>
+<span class="mi">94</span>  <span class="n">human2_lib1</span><span class="o">.</span><span class="n">final_cell_0544</span>        <span class="n">Macrophages</span>             <span class="mf">0.999957</span>
+<span class="mi">95</span>  <span class="n">human4_lib1</span><span class="o">.</span><span class="n">final_cell_0326</span>        <span class="n">Epsilon</span> <span class="n">cells</span>           <span class="mf">0.999983</span>
+<span class="mi">96</span>  <span class="n">human2_lib3</span><span class="o">.</span><span class="n">final_cell_0147</span>        <span class="n">Macrophages</span>             <span class="mf">1.000000</span>
+<span class="mi">97</span>  <span class="n">human4_lib1</span><span class="o">.</span><span class="n">final_cell_0295</span>        <span class="n">Macrophages</span>             <span class="mf">0.999955</span>
+</pre></div>
+</div>
+</section>
+<section id="train-a-regression-model-that-predict-a-continous-value">
+<h2>Train a regression model that predict a continous value<a class="headerlink" href="#train-a-regression-model-that-predict-a-continous-value" title="Link to this heading"></a></h2>
+<p>In addition to discrete cell types, we provided a regression mode (set the <code class="docutils literal notranslate"><span class="pre">task</span></code> argument to <code class="docutils literal notranslate"><span class="pre">regression</span></code>) to predict a continous cell status. The demo dataset contains a meta data <code class="docutils literal notranslate"><span class="pre">baron_meta_data_senescence_score.csv</span></code> with a column <code class="docutils literal notranslate"><span class="pre">senescence_score</span></code> under the <code class="docutils literal notranslate"><span class="pre">demo</span></code> directory. The <code class="docutils literal notranslate"><span class="pre">senescence_score</span></code> is a continous value. We can train a regression model to predict the <code class="docutils literal notranslate"><span class="pre">senescence_score</span></code>. The following serves as an example of the training process using the demo dataset. The data processing and connections building are similar to the classification model. The sole distinction lies in setting the <code class="docutils literal notranslate"><span class="pre">task</span></code> argument to <code class="docutils literal notranslate"><span class="pre">regression</span></code> and specifying the <code class="docutils literal notranslate"><span class="pre">label</span></code> argument to correspond to a column in the metadata that you aim to predict.</p>
+<p><strong>1. Data normalization and filtering</strong></p>
+<p>Normalize data and filter out genes that expressed in fewer cells. The number of genes to be retained can be customized by using the argument <code class="docutils literal notranslate"><span class="pre">--num_genes</span></code>. The default value is 2000. The normalized and filtered data will be saved in the <code class="docutils literal notranslate"><span class="pre">./demo/</span></code> folder.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">norm_and_filter</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">num_genes</span> <span class="mi">2000</span> <span class="o">--</span><span class="n">output</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p><strong>2. Building network connections</strong></p>
+<p>Build network connections between gene layer, TF layer and GO layer according to GO annotations and TF annotations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">data_processing</span><span class="o">.</span><span class="n">py</span> <span class="n">build_network</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">GO_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">goa_human</span><span class="o">.</span><span class="n">gaf</span>  <span class="o">--</span><span class="n">TF_annotation</span> <span class="n">demo</span><span class="o">/</span><span class="n">TF_annotation_hg38</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+<p><strong>3. Training regression model</strong></p>
+<p>Set the <code class="docutils literal notranslate"><span class="pre">task</span></code> argument to <code class="docutils literal notranslate"><span class="pre">regression</span></code> and specify the <code class="docutils literal notranslate"><span class="pre">label</span></code> argument to correspond to a column in the metadata that you aim to predict.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">py</span> <span class="n">train</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data_filtered</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">task</span> <span class="n">regression</span> <span class="o">--</span><span class="n">epoch</span> <span class="mi">100</span> <span class="o">--</span><span class="n">batch_size</span> <span class="mi">8</span> <span class="o">--</span><span class="n">meta_data</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_meta_data_senescence_score</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">label</span> <span class="n">senescence_score</span> <span class="o">--</span><span class="n">model</span> <span class="n">models</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">senescence_score</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">pkl</span>
+</pre></div>
+</div>
+<p><strong>4. Predicitng new data</strong></p>
+<p>Load pre-trained model and predict new data. The predicted results include a predicted cell type label along with the predicted value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">py</span> <span class="n">predict</span> <span class="o">--</span><span class="n">gene_expression_matrix</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_data</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">task</span> <span class="n">regression</span> <span class="o">--</span><span class="n">model</span> <span class="n">models</span><span class="o">/</span><span class="n">scGO</span><span class="o">.</span><span class="n">senescence_score</span><span class="o">.</span><span class="n">demo</span><span class="o">.</span><span class="n">pkl</span> <span class="o">--</span><span class="n">output</span> <span class="n">demo</span><span class="o">/</span><span class="n">baron_meta_data_senescence_score</span><span class="o">.</span><span class="n">predicted</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>After the data processing and model training, the following files should be generated by scGO. The trained model will be saved in the <code class="docutils literal notranslate"><span class="pre">./models/</span></code> folder. You can utilize this model for making predictions in the future.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>demo
+├── baron_data.csv
+├── baron_data_filtered.csv
+├── baron_data_filtered.predicted.csv
+├── baron_meta_data.csv
+├── baron_meta_data_senescence_score.csv
+├── baron_meta_data_senescence_score.predicted.csv
+├── feature
+├── gene_TF_dict
+├── gene_to_TF_transform_matrix
+├── goa_human.gaf.zip
+├── GO_mask
+├── GO_TF_mask
+├── test_data.csv
+├── TF_annotation_hg38.demo.tsv
+├── TF_gene_dict
+└── TF_mask
+models
+├── scGO.demo.pkl
+└── scGO.senescence_score.demo.pkl
+</pre></div>
+</div>
+<p>The execution time for each demonstration is estimated to be approximately 0-3 minutes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="help.html" class="btn btn-neutral float-right" title="Getting Help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yulab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
