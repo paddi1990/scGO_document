@@ -31,14 +31,13 @@ Build network connections between gene layer, TF layer and GO layer according to
 **3. Model training**
 
 To train the scGO model using your own dataset from scratch, you can run the ``scGO.py`` script with the command ``train``. scGO accepts both single-cell gene expression matrix (.csv) as input. Meta data (.csv) is needed for the training process. The column cell_type in the meta data is used as the label for training. You can specify the model save path by using the argument ``--model``. The model's training epochs can be defined using the argument ``--epochs``, and the model states will be saved at the end of each epoch. The training process duration can vary, depending on the size of your dataset and the computational capacity, and may range from minutes to several hours. Here is an example of the training process using the demo dataset.
-
 ::
     python scripts/scGO.py train --gene_expression_matrix demo/baron_data_filtered.csv --meta_data demo/baron_meta_data.csv --model models/scGO.demo.pkl
 
 During the training process, the following information can be used to monitor and evaluate the performance of the model:
 ::
     epoch 0         accuracy:        0.8    loss:    0.6765657464663187
-    epoch 1         accuracy:        1.0    loss:    0.21495116502046585
+    epoch 1         accuracy:        1.0    loss:    0.21495116502046585 
     epoch 2         accuracy:        1.0    loss:    0.045270659029483795
     epoch 3         accuracy:        1.0    loss:    0.01799739959339301
     epoch 4         accuracy:        1.0    loss:    0.008456315845251083
@@ -121,11 +120,14 @@ Build network connections between gene layer, TF layer and GO layer according to
     python scripts/data_processing.py build_network --gene_expression_matrix demo/baron_data_filtered.csv --GO_annotation demo/goa_human.gaf  --TF_annotation demo/TF_annotation_hg38.demo.tsv
 
 **3. Training regression model**
+
+Set the ``task`` argument to ``regression`` and specify the ``label`` argument to correspond to a column in the metadata that you aim to predict.
 ::
     python scripts/scGO.py train --gene_expression_matrix demo/baron_data_filtered.csv --task regression --epoch 100 --batch_size 8 --meta_data demo/baron_meta_data_senescence_score.csv --label senescence_score --model models/scGO.senescence_score.demo.pkl
 
 **4. Predicitng new data**
-Predict:
+
+Load pre-trained model and predict new data. The predicted results include a predicted cell type label along with the predicted value. 
 ::
     python scripts/scGO.py predict --gene_expression_matrix demo/baron_data.csv --task regression --model models/scGO.senescence_score.demo.pkl --output demo/baron_meta_data_senescence_score.predicted.csv
 
@@ -148,7 +150,9 @@ After the data processing and model training, the following files should be gene
     ├── TF_annotation_hg38.demo.tsv
     ├── TF_gene_dict
     └── TF_mask
-
+    models
+    ├── scGO.demo.pkl
+    └── scGO.senescence_score.demo.pkl
 
 
 
